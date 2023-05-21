@@ -97,7 +97,7 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 @app.route('/index')
 def index():
     # render web page with plotly graphs
-    return render_template('master.html')
+    return render_template('master_dog.html')
 
 @app.route('/go', methods = ['POST'])
 def go():
@@ -118,7 +118,7 @@ Partially adapted from https://blog.filestack.com/thoughts-and-knowledge/secure-
         
     # This will render the go.html Please see that file. 
     return render_template(
-        'go.html',
+        'go_dog.html',
         result=res
     )
 
