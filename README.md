@@ -1,8 +1,7 @@
 [//]: # (Image References)
 
 [image1]: ./images/sample_dog_output.png "Sample Output"
-[image2]: ./images/vgg16_model.png "VGG-16 Model Keras Layers"
-[image3]: ./images/vgg16_model_draw.png "VGG16 Model Figure"
+[image2]: ./images/vgg16_model.png "VGG-16 Model Keras Layers""
 
 
 ## Project Overview
@@ -115,11 +114,15 @@ python dog_classifier.py
 - `static` <br>
   &nbsp;| &nbsp;&nbsp; 7 `jpg/jpeg` image files user uploaded for classification <br>
 - `README.md`: readme file
-- `.gitattributes`: contains files managed by git-lfs
 - `.gitignore`: file/folders to ignore
-- `environment_dogApp.yml`: flask app GPU anaconda python environment export
-- `setup.cfg`: setup configs for flake8
 - `dog_app.ipynb`: notebook used for exploration, dog breed classification model creation and training.
+- `extract_bottleneck_features.py`: python file used for extracting bottleneck features.
 
+
+## Results
+Depending on the nature of the project, the result is shown and can be tested in web page.
+![Web App][image2]
 
 ---
+## Licensing, Authors, and Acknowledgements
+For this project, credit must give to Udacity for the data. Any enquiry with the Licensing for the data should directly go to Udacity. Otherwise, feel free to use the code here as you would like! 
