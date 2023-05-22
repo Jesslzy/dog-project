@@ -7,31 +7,35 @@
 
 ## Project Overview
 
-Welcome to the Convolutional Neural Networks (CNN) project in the AI Nanodegree! In this project, you will learn how to build a pipeline that can be used within a web or mobile app to process real-world, user-supplied images.  Given an image of a dog, your algorithm will identify an estimate of the canine’s breed.  If supplied an image of a human, the code will identify the resembling dog breed.  
+Welcome to the Convolutional Neural Networks (CNN) project in the AI Nanodegree! In this project, I have build a neural network model using transfer learning from the InceptionV3 model architecture. The model can be used within a web or mobile app to process real-world, user-supplied images. Given an image of a dog, my algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the code will identify that human faces are present. If neither a human nor a dog is presented in the supplied image, the algorithm will let you know.
 
 ![Sample Output][image1]
 
-Along with exploring state-of-the-art CNN models for classification, you will make important design decisions about the user experience for your app.  Our goal is that by completing this lab, you understand the challenges involved in piecing together a series of models designed to perform various tasks in a data processing pipeline.  Each model has its strengths and weaknesses, and engineering a real-world application often involves solving many problems without a perfect answer.  Your imperfect solution will nonetheless create a fun user experience!
+After training and tuning the neural network, I have achieved a 78% of accuracy in classifying the breed of a dog.
+
+## Table of Contents
+
+  * [Project Instructions](#Project Instructions)
+  * [File Description](#File-Description)
+  * [Results](#Results)
+  * [License](#license)
 
 ## Project Instructions
 
-### Instructions
+### Get Data Instructions
 
-1. Clone the repository and navigate to the downloaded folder.
-```	
-git clone https://github.com/udacity/dog-project.git
-cd dog-project
-```
+1. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/data/dogImages`. 
+2. Download the [VGG-16 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
+3. Download the [InceptionV3 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogInceptionV3Data.npz) for additional dog dataset. Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
 
-2. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/dogImages`. 
+### Requirements
 
-3. Download the [human dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/lfw`.  If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
+#### Run dog_app.ipynb
+For running dog_app.ipynb, GPU mode is recommended considering the complexity of neural network models. For instructions to get GPU support locally, please se below options. Apart from GPU, there should be no necessary libraries to run the code here beyond the Anaconda distribution of Python. The code should run with no issues using Python versions 3.*
 
-4. Download the [VGG-16 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
+1. __If you plan to install TensorFlow with GPU support on your local machine__, follow [the guide](https://www.tensorflow.org/install/) to install the necessary NVIDIA software on your system.  If you are using an EC2 GPU instance, you can skip this step.
 
-5. (Optional) __If you plan to install TensorFlow with GPU support on your local machine__, follow [the guide](https://www.tensorflow.org/install/) to install the necessary NVIDIA software on your system.  If you are using an EC2 GPU instance, you can skip this step.
-
-6. (Optional) **If you are running the project on your local machine (and not using AWS)**, create (and activate) a new environment.
+2. **If you are running the project on your local machine (and not using AWS)**, create (and activate) a new environment.
 
 	- __Linux__ (to install with __GPU support__, change `requirements/dog-linux.yml` to `requirements/dog-linux-gpu.yml`): 
 	```
@@ -53,7 +57,7 @@ cd dog-project
 	activate dog-project
 	```
 
-7. (Optional) **If you are running the project on your local machine (and not using AWS)** and Step 6 throws errors, try this __alternative__ step to create your environment.
+3. **If you are running the project on your local machine (and not using AWS)** and Step 6 throws errors, try this __alternative__ step to create your environment.
 
 	- __Linux__ or __Mac__ (to install with __GPU support__, change `requirements/requirements.txt` to `requirements/requirements-gpu.txt`): 
 	```
@@ -72,50 +76,50 @@ cd dog-project
 	pip install -r requirements/requirements.txt
 	```
 	
-8. (Optional) **If you are using AWS**, install Tensorflow.
+4. **If you are using AWS**, install Tensorflow.
 ```
 sudo python3 -m pip install -r requirements/requirements-gpu.txt
 ```
-	
-9. Switch [Keras backend](https://keras.io/backend/) to TensorFlow.
-	- __Linux__ or __Mac__: 
-		```
-		KERAS_BACKEND=tensorflow python -c "from keras import backend"
-		```
-	- __Windows__: 
-		```
-		set KERAS_BACKEND=tensorflow
-		python -c "from keras import backend"
-		```
 
-10. (Optional) **If you are running the project on your local machine (and not using AWS)**, create an [IPython kernel](http://ipython.readthedocs.io/en/stable/install/kernel_install.html) for the `dog-project` environment. 
+#### Run flask app
+To run flask app, clone this repo, cd to the app folder in your console and run following:
 ```
-python -m ipykernel install --user --name dog-project --display-name "dog-project"
+python dog_classifier.py
 ```
 
-11. Open the notebook.
-```
-jupyter notebook dog_app.ipynb
-```
+## File Descrption
+- `app` <br>
+  &nbsp;| - `templates` <br>
+  &nbsp;| --- `master_dog.html`: main page of web app <br>
+  &nbsp;| --- `go_dog.html`: extended section of web app to display classification results <br>
+  &nbsp;| - `dog_classifier.py`: Dog breed classifier app <br>
+- `bin` <br>
+  &nbsp;| - `run-black.sh`: script to run black linting <br>
+  &nbsp;| - `run-black.sh`: script to run flake8 linting <br>
+  &nbsp;| - `run-black.sh`: script to run mypy linting <br>
+- `bottleneck_features` <br>
+  &nbsp;| &nbsp;&nbsp; Directory to store bottleneck features for the `dog_app` notebook (empty in git) <br>
+- `data` <br>
+  &nbsp;| - `dog_names.json`: json file containing names of dog breeds that can be classified <br>
+- `haarcascades` <br>
+  &nbsp;| - `haarcascades_frontalface_alt.xml`: model weights for human face recognition model <br>
+- `images` <br>
+  &nbsp;| &nbsp;&nbsp; 13 `jpg/png` image files used in the `dog_app` notebook and README <br>
+- `requirements` <br>
+  &nbsp;| - `dog-linux-gpu.yml`: GPU `dog_app` notebook anaconda python environment export <br>
+  &nbsp;| - `dog-linux.yml`: CPU `dog_app` notebook anaconda python environment export <br>
+  &nbsp;| - `requirements-gpu.txt`: GPU `dog_app` notebook pip python environment export <br>
+  &nbsp;| - `requirements.txt`: CPU `dog_app` notebook pip python environment export <br>  
+- `saved_models` <br>
+  &nbsp;| - `dogBreedXception.h5`: re-trained imagenet model for dog breed classification <br>
+- `test_images` <br>
+  &nbsp;| &nbsp;&nbsp; 7 `jpg/jpeg` image files used to testing final CNN model <br>
+- `README.md`: readme file
+- `.gitattributes`: contains files managed by git-lfs
+- `.gitignore`: file/folders to ignore
+- `environment_dogApp.yml`: flask app GPU anaconda python environment export
+- `setup.cfg`: setup configs for flake8
+- `dog_app.ipynb`: notebook used for exploration, dog breed classification model creation and training.
 
-12. (Optional) **If you are running the project on your local machine (and not using AWS)**, before running code, change the kernel to match the dog-project environment by using the drop-down menu (**Kernel > Change kernel > dog-project**). Then, follow the instructions in the notebook.
 
-__NOTE:__ While some code has already been implemented to get you started, you will need to implement additional functionality to successfully answer all of the questions included in the notebook. __Unless requested, do not modify code that has already been included.__
-
-## Evaluation
-
-Your project will be reviewed by a Udacity reviewer against the CNN project [rubric](https://review.udacity.com/#!/rubrics/810/view).  Review this rubric thoroughly, and self-evaluate your project before submission.  All criteria found in the rubric must meet specifications for you to pass.
-
-## Project Submission
-
-When you are ready to submit your project, collect the following files and compress them into a single archive for upload:
-- The `dog_app.ipynb` file with fully functional code, all code cells executed and displaying output, and all questions answered.
-- An HTML or PDF export of the project notebook with the name `report.html` or `report.pdf`.
-- Any additional images used for the project that were not supplied to you for the project. __Please do not include the project data sets in the `dogImages/` or `lfw/` folders.  Likewise, please do not include the `bottleneck_features/` folder.__
-
-Alternatively, your submission could consist of the GitHub link to your repository.
-
- # Archival Note 
- This repository is deprecated; therefore, we are going to archive it. However, learners will be able to fork it to their personal Github account but cannot submit PRs to this repository. If you have any issues or suggestions to make, feel free to: 
-- Utilize the https://knowledge.udacity.com/ forum to seek help on content-specific issues. 
-- Submit a support ticket along with the link to your forked repository if (learners are) blocked for other reasons. Here are the links for the [retail consumers](https://udacity.zendesk.com/hc/en-us/requests/new) and [enterprise learners](https://udacityenterprise.zendesk.com/hc/en-us/requests/new?ticket_form_id=360000279131).
+---
