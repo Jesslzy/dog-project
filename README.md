@@ -1,7 +1,7 @@
 [//]: # (Image References)
 
 [image1]: ./images/sample_dog_output.png "Sample Output"
-[image2]: ./images/dog_web_app "Web App"
+[image2]: ./images/dog_web_app.jpeg "Web App"
 
 
 ## Project Overview
@@ -122,7 +122,6 @@ python dog_classifier.py
 ## Results
 Depending on the nature of the project, the result is shown and can be tested in web page.
 ![Web App][image2]
-
 ---
 ## Licensing, Authors, and Acknowledgements
 For this project, credit must give to Udacity for the data. Any enquiry with the Licensing for the data should directly go to Udacity. Otherwise, feel free to use the code here as you would like! 
