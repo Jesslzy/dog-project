@@ -1,7 +1,7 @@
 [//]: # (Image References)
 
 [image1]: ./images/sample_dog_output.png "Sample Output"
-[image2]: ./images/vgg16_model.png "VGG-16 Model Keras Layers""
+[image2]: ./images/dog_web_app "Web App"
 
 
 ## Project Overview
